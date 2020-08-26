@@ -1,0 +1,8 @@
+{
+    "BLUEPILL": {
+        "inherits": [
+            "MCU_STM32F103x8"
+        ],
+        "device_name": "STM32F103C8"
+    }
+}

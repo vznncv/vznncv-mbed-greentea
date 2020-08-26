@@ -1,0 +1,27 @@
+# IDE files
+/.idea
+/*.config
+/*.creator
+/*.files
+/*.includes
+/*.cflags
+/*.creator.*
+/*.cxxflags
+Makefile
+
+# Temporary/volatile mbed files
+/GettingStarted.html
+/mbed_config.h
+/mbed_settings.py
+
+# python files
+__pycache__/
+*.py[cod]
+
+# local STM tools configuration
+cube_path.json
+/BUILD
+
+# ignore mbed-os directory as this folder it isn't independent repository
+/mbed-os
+
