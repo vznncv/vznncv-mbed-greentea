@@ -110,7 +110,7 @@ def build_main(project_dir, *, app_config=None, profile=None, verbose_level=0, n
     """
     program_config = ProgramConfig(project_dir)
     profile = program_config.resolve_profile(profile)
-    profile_name = os.path.basename(profile)
+    profile_name = os.path.splitext(os.path.basename(profile))[0]
     target_name = program_config.resolve_target()
     toolchain_name = program_config.resolve_toolchaing()
 

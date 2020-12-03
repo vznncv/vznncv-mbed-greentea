@@ -1,0 +1,22 @@
+name: Library tests
+
+on: push
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ 3.6, 3.7, 3.8 ]
+    container: "python:${{ matrix.python-version }}"
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install tox
+        run: pip install tox
+      - name: Install extra dependencies
+        run: apt-get update && apt-get install --yes socat
+      - name: Run tests
+        run: |
+          TOX_ENV=$(echo '${{ matrix.python-version }}' | sed -e 's/^/py/' -e 's/\.//')
+          tox -e "$TOX_ENV"

@@ -10,9 +10,13 @@ from unittest.mock import patch
 import pytest
 
 
-def pytest_configure():
+def pytest_configure(config):
     import logging
     logging.basicConfig(level=logging.INFO)
+
+    config.addinivalue_line(
+        "markers", "base_project_dir(path): mark directory with test data"
+    )
 
 
 @pytest.fixture(scope="function")
