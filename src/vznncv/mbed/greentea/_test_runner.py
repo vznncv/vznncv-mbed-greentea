@@ -115,7 +115,7 @@ def flash_artifact(project_dir, *, board_manager_script: Optional[str] = None, v
 
     external_target_manager = ExternalTargetManager(board_manager_script) if board_manager_script is not None else None
 
-    with apply_mbed_api_patches_for_external_target_script(external_target_manager):
+    with apply_mbed_api_patches_for_external_target_script(external_target_manager), patch_cwd(project_dir):
         # find target board
         target_mbed = _find_target(mbed_os_tools.detect.create(), target_name)
         target_id = target_mbed['target_id']
@@ -156,7 +156,7 @@ def debug_test(project_dir, *, board_manager_script: Optional[str] = None, verbo
 
     external_target_manager = ExternalTargetManager(board_manager_script) if board_manager_script is not None else None
 
-    with apply_mbed_api_patches_for_external_target_script(external_target_manager):
+    with apply_mbed_api_patches_for_external_target_script(external_target_manager), patch_cwd(project_dir):
         # find target board
         target_mbed = _find_target(mbed_os_tools.detect.create(), target_name)
         serial_port = target_mbed['serial_port']
@@ -177,7 +177,7 @@ def debug_test(project_dir, *, board_manager_script: Optional[str] = None, verbo
         if verbose_level >= 0:
             mbedhtrun_args.append('--verbose')
 
-        with patch_argv(mbedhtrun_args), patch_cwd(project_dir):
+        with patch_argv(mbedhtrun_args):
             logger.info(f"Run command: {' '.join(mbedhtrun_args)}")
             try:
                 ret_code = htrun_main()
